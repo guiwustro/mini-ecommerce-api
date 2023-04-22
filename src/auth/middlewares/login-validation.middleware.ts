@@ -14,7 +14,6 @@ export class LoginValidationMiddleware implements NestMiddleware {
     const loginData = new UserLogin();
     loginData.username = username;
     loginData.password = password;
-
     const validations = await validate(loginData);
 
     if (validations.length) {

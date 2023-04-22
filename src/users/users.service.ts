@@ -40,13 +40,10 @@ export class UserService {
     return plainToInstance(User, users);
   }
 
-  findOne(id: number) {
+  findOne(_id: string) {
     const user = this.userModel.findOne({
       where: {
-        id,
-      },
-      relations: {
-        events: true,
+        _id,
       },
     });
     return plainToInstance(User, user);

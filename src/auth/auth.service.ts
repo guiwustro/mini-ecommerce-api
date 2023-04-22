@@ -1,12 +1,12 @@
-import { UserService } from './../users/users.service';
-import { IUserPayload } from './models/user.payload';
-import { UserDocument } from '../users/schemas/user.schema';
-import { HttpStatus } from '@nestjs/common/enums';
-import { instanceToPlain } from 'class-transformer';
 import { Injectable } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
+import { HttpStatus } from '@nestjs/common/enums';
 import { HttpException } from '@nestjs/common/exceptions';
 import { JwtService } from '@nestjs/jwt/dist/jwt.service';
+import * as bcrypt from 'bcrypt';
+import { instanceToPlain } from 'class-transformer';
+import { UserDocument } from '../users/schemas/user.schema';
+import { UserService } from './../users/users.service';
+import { IUserPayload } from './models/user.payload';
 
 @Injectable()
 export class AuthService {
@@ -18,9 +18,7 @@ export class AuthService {
     const user = await this.userService.findByUsername(username);
     if (user) {
       if (bcrypt.compareSync(password, user.password)) {
-        return instanceToPlain({
-          ...user,
-        });
+        return user;
       }
     }
     throw new HttpException(
@@ -31,8 +29,9 @@ export class AuthService {
 
   login(userData: UserDocument): { token: string } {
     const payload: IUserPayload = {
-      sub: userData._id,
+      sub: userData._id.toString(),
       username: userData.username,
+      type: userData.type,
     };
     const token = this.jwtService.sign(payload);
     return { token };

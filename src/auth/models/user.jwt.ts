@@ -1,4 +1,5 @@
 export interface IUserFromJwt {
-  id: number;
+  _id: string;
+  type: 'common' | 'admin';
   username: string;
 }

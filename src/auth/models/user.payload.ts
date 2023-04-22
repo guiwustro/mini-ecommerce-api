@@ -1,6 +1,7 @@
 export interface IUserPayload {
-  sub: number;
+  sub: string;
   username: string;
+  type: 'common' | 'admin';
   iat?: number;
   exp?: number;
 }
