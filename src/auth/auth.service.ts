@@ -27,13 +27,13 @@ export class AuthService {
     );
   }
 
-  login(userData: UserDocument): { token: string } {
+  login(userData: UserDocument): { token: string; type: 'admin' | 'common' } {
     const payload: IUserPayload = {
       sub: userData._id.toString(),
       username: userData.username,
       type: userData.type,
     };
     const token = this.jwtService.sign(payload);
-    return { token };
+    return { token, type: userData.type };
   }
 }

@@ -12,7 +12,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Event manager API')
     .setDescription(
-      'This API allows an user to managenment your products and orders.',
+      'This API allows an user to management your products and orders.',
     )
     .setVersion('1.0')
     .addTag('events')
@@ -27,6 +27,6 @@ async function bootstrap() {
     },
   });
 
-  await app.listen(process.env.APP_PORT);
+  await app.listen(process.env.APP_PORT, '0.0.0.0');
 }
 bootstrap();

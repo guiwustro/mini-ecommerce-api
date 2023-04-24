@@ -97,8 +97,14 @@ export class ProductsService {
         HttpStatus.BAD_REQUEST,
       );
     }
-    await this.productModel.deleteOne({
-      _id,
-    });
+    await this.productModel.findOneAndUpdate(
+      { _id },
+      {
+        $set: {
+          is_active: false,
+        },
+      },
+      { new: true },
+    );
   }
 }
