@@ -15,7 +15,6 @@ export class ImageCloudinaryService {
     id: string,
   ): Promise<Partial<ProductImage>[]> {
     const ProductImagesDTO: Partial<ProductImage>[] = [];
-    console.log(files);
     for (let i = 0; i < files.length; i += 1) {
       const upload = await cloudinary.uploader.upload(
         files[i].path,

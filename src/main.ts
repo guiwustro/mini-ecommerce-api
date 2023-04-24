@@ -10,12 +10,11 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
   const config = new DocumentBuilder()
-    .setTitle('Event manager API')
+    .setTitle('Product API')
     .setDescription(
       'This API allows an user to management your products and orders.',
     )
     .setVersion('1.0')
-    .addTag('events')
     .addBearerAuth()
     .build();
 

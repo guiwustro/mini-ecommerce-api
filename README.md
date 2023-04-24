@@ -30,5 +30,5 @@ docker-compose up
 Outra opção de iniciar a aplicação, sem utilizar docker.
 
 ```
-yarn dev
+yarn start:dev
 ```
