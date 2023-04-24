@@ -3,7 +3,7 @@ import { changeFileName } from './change-file-name';
 
 export const uploadConfig = {
   storage: diskStorage({
-    destination: './uploads',
+    destination: '/tmp',
     filename: (req, file, cb) => {
       const newFileName = changeFileName(file.originalname);
       cb(null, newFileName);

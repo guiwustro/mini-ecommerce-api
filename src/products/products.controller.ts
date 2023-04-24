@@ -41,7 +41,6 @@ export class ProductsController {
     @UploadedFiles() files: Array<Express.Multer.File>,
     @Param('id') id: string,
   ) {
-    console.log(files);
     const productsImagesDTO =
       await this.imageCloudinaryService.uploadImageToCloudinary(files, id);
     return this.productsService.addImages(productsImagesDTO, id);
