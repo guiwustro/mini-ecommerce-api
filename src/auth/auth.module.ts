@@ -9,8 +9,9 @@ import { AuthService } from './auth.service';
 import { LocalStrategy } from './strategies/local.strategy';
 import { MiddlewareConsumer, NestModule } from '@nestjs/common/interfaces';
 import { LoginValidationMiddleware } from './middlewares/login-validation.middleware';
+import * as dotenv from 'dotenv';
 
-// dotenv.config();
+dotenv.config();
 
 @Module({
   imports: [
