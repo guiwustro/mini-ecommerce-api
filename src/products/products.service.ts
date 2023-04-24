@@ -5,6 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Product } from './schemas/product.schema';
 import { Model } from 'mongoose';
 import { ProductDocument } from './schemas/product.schema';
+import { ProductImage } from './products-upload-cloudinary.service';
 
 @Injectable()
 export class ProductsService {
@@ -28,6 +29,27 @@ export class ProductsService {
     const product = this.productModel.create(createProductDto);
 
     return product;
+  }
+
+  async addImages(productsImagesDTO: Partial<ProductImage>[], id: string) {
+    const product = await this.productModel.findOne({ _id: id });
+    if (!product) {
+      throw new HttpException(
+        'This product does not exist.',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    // Trocar depois isso por um array de imagens.
+    const updateProduct = await this.productModel.findOneAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          image: productsImagesDTO[0].url,
+        },
+      },
+      { new: true },
+    );
+    return updateProduct;
   }
 
   async findAll({ page }: { page?: number }) {
