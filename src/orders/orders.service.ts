@@ -4,11 +4,11 @@ import { UpdateOrderDto } from './dto/update-order.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Order, OrderDocument } from './schemas/order.schema';
 import { Model } from 'mongoose';
-import { Product, ProductDocument } from 'src/products/schemas/product.schema';
-import { User } from 'src/users/schemas/user.schema';
+import { Product, ProductDocument } from '../products/schemas/product.schema';
+import { User } from '../users/schemas/user.schema';
 import { plainToInstance } from 'class-transformer';
-import { IUserPayload } from 'src/auth/models/user.payload';
-import { IUserFromJwt } from 'src/auth/models/user.jwt';
+import { IUserPayload } from '../auth/models/user.payload';
+import { IUserFromJwt } from '../auth/models/user.jwt';
 interface IOrderProducts {
   _id: string;
   amount: number;

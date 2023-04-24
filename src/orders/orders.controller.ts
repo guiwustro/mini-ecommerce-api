@@ -11,9 +11,9 @@ import {
 import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
-import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
-import { User } from 'src/users/schemas/user.schema';
-import { IUserFromJwt } from 'src/auth/models/user.jwt';
+import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { User } from '../users/schemas/user.schema';
+import { IUserFromJwt } from '../auth/models/user.jwt';
 
 @Controller('orders')
 export class OrdersController {
