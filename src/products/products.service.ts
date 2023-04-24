@@ -30,10 +30,42 @@ export class ProductsService {
     return product;
   }
 
-  async findAll() {
-    const products = await this.productModel.find();
+  async findAll({ page }: { page?: number }) {
+    if (!page) {
+      const products = await this.productModel.find();
+      return products;
+    }
+    const productsPerPage = 10;
+    const pipeline = [
+      {
+        $facet: {
+          products: [
+            { $skip: (page - 1) * productsPerPage },
+            { $limit: productsPerPage },
+          ],
+          totalCount: [{ $count: 'total' }],
+        },
+      },
+      {
+        $project: {
+          products: 1,
+          totalCount: { $arrayElemAt: ['$totalCount.total', 0] },
+          totalPages: {
+            $ceil: {
+              $divide: [
+                { $arrayElemAt: ['$totalCount.total', 0] },
+                productsPerPage,
+              ],
+            },
+          },
+        },
+      },
+    ];
 
-    return products;
+    const [{ products, totalCount, totalPages }] =
+      await this.productModel.aggregate(pipeline);
+
+    return { products, totalCount, totalPages, currentPage: +page };
   }
 
   async findOne(_id: string) {
